@@ -17,7 +17,7 @@ async function extractLocalPdfText(filePath: string): Promise<string> {
     const data = await pdf(buffer);
     return data.text;
   } catch (err) {
-    throw new Error('ERROR leyendo PDF: ' + err);
+    throw new Error('ERROR leyendo PDF: ' + String(err));
   }
 }
 
@@ -91,6 +91,7 @@ Responde SOLO con texto plano, sin comillas, sin bloques de código, sin etiquet
     return NextResponse.json({ feedback: responseText });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);
+
     return NextResponse.json(
       {
         error: 'Error al analizar la conversación',
