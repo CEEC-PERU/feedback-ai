@@ -79,13 +79,16 @@ client: si si lo recuerdo`);
     setFeedback('');
 
     try {
-      const analyzeResponse = await fetch('/api/analyze-conversation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ conversation }),
-      });
+      const analyzeResponse = await fetch(
+        'https://feedback-ai-two.vercel.app/api/analyze-conversation',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ conversation }),
+        }
+      );
 
       if (!analyzeResponse.ok) {
         const errorData = await analyzeResponse.json();
@@ -97,11 +100,14 @@ client: si si lo recuerdo`);
       const apiResult = await analyzeResponse.json();
       setFeedback(apiResult.feedback);
 
-      const audioResponse = await fetch('/api/text-to-speech', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: apiResult.feedback }),
-      });
+      const audioResponse = await fetch(
+        'https://feedback-ai-two.vercel.app/api/text-to-speech',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: apiResult.feedback }),
+        }
+      );
 
       if (audioResponse.ok) {
         const audioData = await audioResponse.json();
