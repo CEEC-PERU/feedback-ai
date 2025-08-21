@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const vertex_ai = new VertexAI({
       project: process.env.GOOGLE_PROJECT_ID!,
-      location: 'us-central1',
+      location: 'europe-west3',
     });
 
     // Probar diferentes modelos
