@@ -311,7 +311,7 @@ client: si si lo recuerdo`);
                     value={conversation}
                     onChange={(e) => setConversation(e.target.value)}
                     className="w-full h-80 p-6 border-2 border-gray-200 rounded-2xl resize-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 font-mono text-sm bg-gradient-to-br from-gray-50 to-white hover:from-white hover:to-gray-50 shadow-inner"
-                    placeholder="Ingresa la conversación aquí...&#10;&#10;Formato esperado:&#10;operator: [mensaje del operador]&#10;client: [mensaje del cliente]&#10;&#10;Ejemplo:&#10;operator: Buenos días, ¿cómo está?&#10;client: Muy bien, gracias"
+                    placeholder='Ingresa la conversación aquí...&#10;&#10;Formato esperado:&#10;operator: [mensaje del operador]&#10;client: [mensaje del cliente]&#10;&#10;Ejemplo:&#10;operator: Buenos días, "¿cómo está?"&#10;client: Muy bien, gracias'
                   />
 
                   {/* Enhanced character counter */}

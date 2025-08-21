@@ -89,11 +89,12 @@ Responde SOLO con texto plano, sin comillas, sin bloques de código, sin etiquet
 
     // NO intentamos parsear, solo devolvemos el texto plano
     return NextResponse.json({ feedback: responseText });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
       {
         error: 'Error al analizar la conversación',
-        details: error?.message || String(error),
+        details: errorMessage,
         timestamp: new Date().toISOString(),
       },
       { status: 500 }
