@@ -15,8 +15,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // Leer PDF
     let scriptReference: string;
     try {
       const pdfPath = path.join(

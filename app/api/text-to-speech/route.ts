@@ -11,9 +11,6 @@ export async function POST(request: NextRequest) {
 
     console.log('Generando audio para texto:', text.substring(0, 100) + '...');
 
-    // Simular generación de audio con Web Speech API del lado del cliente
-    // Por ahora retornamos los datos para que el frontend maneje el audio
-
     const audioData = {
       success: true,
       textToSpeak: text,
