@@ -3,6 +3,7 @@ import { VertexAI } from '@google-cloud/vertexai';
 import pdf from 'pdf-parse';
 import path from 'path';
 import fs from 'fs/promises';
+import fsSync from 'fs'; // Importación para sync
 
 const LOCAL_PDF_PATH = path.join(
   process.cwd(),
@@ -59,6 +60,23 @@ ${scriptReference}
 Responde SOLO con texto plano, sin comillas, sin bloques de código, sin etiquetas.
 `;
 
+    // --- Crea el archivo de credenciales desde la variable de entorno ---
+    const secretPath = path.join(
+      process.cwd(),
+      'secrets',
+      'voicebot-novatrainer-34f565779f7e.json'
+    );
+    if (!fsSync.existsSync(secretPath)) {
+      fsSync.mkdirSync(path.dirname(secretPath), { recursive: true });
+      fsSync.writeFileSync(
+        secretPath,
+        process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON!
+      );
+    }
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = secretPath;
+    // ---------------------------------------------------------------
+
+    // Inicializa VertexAI SIN credentials
     const vertex_ai = new VertexAI({
       project: process.env.GOOGLE_PROJECT_ID!,
       location: 'europe-west3',
