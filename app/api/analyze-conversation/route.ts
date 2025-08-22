@@ -1,26 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { VertexAI } from '@google-cloud/vertexai';
-import pdf from 'pdf-parse';
+import { extractLocalPdfText, LOCAL_PDF_PATH } from '../extraPdf';
 import path from 'path';
-import fs from 'fs/promises';
 import fsSync from 'fs'; // Importación para sync
-
-const LOCAL_PDF_PATH = path.join(
-  process.cwd(),
-  'public',
-  'scripts',
-  'script_oncoplus.pdf'
-);
-
-async function extractLocalPdfText(filePath: string): Promise<string> {
-  try {
-    const buffer = await fs.readFile(filePath);
-    const data = await pdf(buffer);
-    return data.text;
-  } catch (err) {
-    throw new Error('ERROR leyendo PDF: ' + String(err));
-  }
-}
 
 export async function POST(request: NextRequest) {
   try {
